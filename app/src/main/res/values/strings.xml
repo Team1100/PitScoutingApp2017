@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">PitScout2017</string>
+    <string name="title_activity_team_list">TeamList</string>
+</resources>
