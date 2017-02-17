@@ -17,8 +17,8 @@ public class LaunchActivity extends AppCompatActivity {
     private final String[] rhodeIsland = ("69,78,88,121,125,126,157,176,190,467,1099,1100," +
             "1124,1153,1277,1350,1757,1768,1786,1973,2064,2079,2168,2262,2877,3466,3525,3719,3780," +
             "4048,4097,4151,4176,4796,5000,5112,5846,5856,6617,6620,6731").split(",");
-    private final String[] neChamp = null;
-    private final String[] worldChamp = null;
+    private final String[] neChamp = {"1100"};
+    private final String[] worldChamp = {"1100"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +43,7 @@ public class LaunchActivity extends AppCompatActivity {
                 teamlist = worldChamp;
                 break;
             default:
-                teamlist = null;
+                teamlist = {"1100"};
         }
         Intent intent = new Intent(this,TeamList.class);
         intent.putExtra(TEAMS_EXTRA, teamlist);
