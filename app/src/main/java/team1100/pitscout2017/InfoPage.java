@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -20,6 +21,7 @@ import java.util.List;
 public class InfoPage extends AppCompatActivity {
 
     private String teamNumber;
+    public static final String TEAM_NUMBER_EXTRA = "team.number.frenchfries.cantstopwontstop";
 
     public static final int NAME_INDEX = 0;
     public static final int DRIVE_INDEX = 1;
@@ -158,6 +160,12 @@ public class InfoPage extends AppCompatActivity {
             e.printStackTrace();
         }
         return data;
+    }
+
+    public void openPhotos(View view){
+        Intent intent = new Intent(this,PhotoPage.class);
+        intent.putExtra(TEAM_NUMBER_EXTRA,teamNumber);
+        startActivity(intent);
     }
 
     @Deprecated //Angrilly

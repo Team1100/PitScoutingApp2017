@@ -2,7 +2,18 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="team1100.pitscout2017">
 
+    <paths xmlns:android="http://schemas.android.com/apk/res/android">
+        <external-path android:name="my_images" android:path="Android/data/team1100.pitscout2017/files/Pictures" />
+    </paths>
+
     <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
+
+
 
     <application
         android:allowBackup="true"
@@ -10,6 +21,17 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="team1100.pitscout2017.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths"></meta-data>
+        </provider>
+
         <activity android:name=".LaunchActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,8 +43,9 @@
             android:name=".TeamList"
             android:label="@string/title_activity_team_list"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".InfoPage"></activity>
-        <activity android:name=".BluetoothActivity"></activity>
+        <activity android:name=".InfoPage" />
+        <activity android:name=".BluetoothActivity" />
+        <activity android:name=".PhotoPage"></activity>
     </application>
 
 </manifest>
