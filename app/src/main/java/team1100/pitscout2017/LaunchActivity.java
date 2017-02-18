@@ -1,7 +1,9 @@
 package team1100.pitscout2017;
 
 import android.app.Activity;
+import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +11,7 @@ import android.widget.RadioGroup;
 
 public class LaunchActivity extends AppCompatActivity {
 
+    private static final int REQUEST_ENABLE_BT = 0;
     public static final String TEAMS_EXTRA = "com.list.android.swagger";
 
     private final String[] graniteState = ("78,95,31,138,238,319,467,509,811,885," +
@@ -24,26 +27,41 @@ public class LaunchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_launch);
+        checkBluetooth();
+    }
+
+    public void checkBluetooth(){
+        BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        if (mBluetoothAdapter == null) {
+            Snackbar.make(findViewById(android.R.id.content),"This device does not have bluetooth!", Snackbar.LENGTH_LONG).show();
+        }
+        if (!mBluetoothAdapter.isEnabled()) {
+            Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+            startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
+        }else{
+            Snackbar.make(findViewById(android.R.id.content),"Bluetooth is enabled!", Snackbar.LENGTH_LONG).show();
+        }
     }
 
     public void startScouting(View view){
         RadioGroup radio = (RadioGroup) findViewById(R.id.event_selector_radio);
         String[] teamlist;
+        System.out.println(radio.getCheckedRadioButtonId());
         switch (radio.getCheckedRadioButtonId()){
-            case 0:
+            case 1:
                 teamlist = graniteState;
                 break;
-            case 1:
+            case 2:
                 teamlist = rhodeIsland;
                 break;
-            case 2:
+            case 3:
                 teamlist = neChamp;
                 break;
-            case 3:
+            case 4:
                 teamlist = worldChamp;
                 break;
             default:
-                teamlist = {"1100"};
+                teamlist = worldChamp;
         }
         Intent intent = new Intent(this,TeamList.class);
         intent.putExtra(TEAMS_EXTRA, teamlist);

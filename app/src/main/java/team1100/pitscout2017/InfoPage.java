@@ -21,13 +21,13 @@ public class InfoPage extends AppCompatActivity {
 
     private String teamNumber;
 
-    private final int NAME_INDEX = 0;
-    private final int DRIVE_INDEX = 1;
-    private final int CIM_INDEX = 2;
-    private final int INTAKE_INDEX = 3;
-    private final int SHOOTER_INDEX = 4;
-    private final int CLIMB_INDEX = 5;
-    private final int COMMENT_INDEX = 6;
+    public static final int NAME_INDEX = 0;
+    public static final int DRIVE_INDEX = 1;
+    public static final int CIM_INDEX = 2;
+    public static final int INTAKE_INDEX = 3;
+    public static final int SHOOTER_INDEX = 4;
+    public static final int CLIMB_INDEX = 5;
+    public static final int COMMENT_INDEX = 6;
 
 
     @Override
@@ -78,15 +78,15 @@ public class InfoPage extends AppCompatActivity {
     @Override
     public void onResume(){
         super.onResume();
-        retreiveSheet();
+        retrieveSheet();
     }
     @Override
     public void onStart(){
         super.onStart();
-        retreiveSheet();
+        retrieveSheet();
     }
 
-    public void retreiveSheet(){
+    public void retrieveSheet(){
         List<String> infos = readInfo();
         if(infos.size()>0){
             String name = infos.get(NAME_INDEX);
@@ -120,13 +120,13 @@ public class InfoPage extends AppCompatActivity {
         FileOutputStream outputStream;
         String[] infos = new String[7];
 
-        infos[NAME_INDEX] = ((EditText)findViewById(R.id.team_name)).getText().toString();
+        infos[NAME_INDEX] = ((EditText)findViewById(R.id.team_name)).getText().toString().replace(","," ");
         infos[CIM_INDEX] = Integer.toString(((Spinner)findViewById(R.id.cim_count)).getSelectedItemPosition());
         infos[DRIVE_INDEX] = Integer.toString(((Spinner)findViewById(R.id.drive_type)).getSelectedItemPosition());
         infos[SHOOTER_INDEX] = Integer.toString(((Spinner)findViewById(R.id.shoot_position)).getSelectedItemPosition());
         infos[INTAKE_INDEX] = Integer.toString(((Spinner)findViewById(R.id.intake_type)).getSelectedItemPosition());
         infos[CLIMB_INDEX] = String.valueOf(((CheckBox)findViewById(R.id.climber)).isChecked());
-        infos[COMMENT_INDEX] = ((EditText)findViewById(R.id.comments)).getText().toString().replace(System.getProperty("line.separator"), "");
+        infos[COMMENT_INDEX] = ((EditText)findViewById(R.id.comments)).getText().toString().replace(System.getProperty("line.separator"), "").replace(","," ");
 
         try {
             outputStream = openFileOutput(filename, Context.MODE_PRIVATE);
@@ -160,6 +160,7 @@ public class InfoPage extends AppCompatActivity {
         return data;
     }
 
+    @Deprecated //Angrilly
     public List<String> getInfo(){
         try{
 
