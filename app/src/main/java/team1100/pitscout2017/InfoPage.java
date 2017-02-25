@@ -29,7 +29,8 @@ public class InfoPage extends AppCompatActivity {
     public static final int INTAKE_INDEX = 3;
     public static final int SHOOTER_INDEX = 4;
     public static final int CLIMB_INDEX = 5;
-    public static final int COMMENT_INDEX = 6;
+    public static final int GEAR_INDEX = 6;
+    public static final int COMMENT_INDEX = 7;
 
 
     @Override
@@ -62,6 +63,10 @@ public class InfoPage extends AppCompatActivity {
                 R.array.options_shoot, R.layout.spinner_item);
         shootSpinner.setAdapter(shootAdapter);
 
+        Spinner gearSpinner = (Spinner)findViewById(R.id.gear_ability);
+        ArrayAdapter<CharSequence> gearAdapter = ArrayAdapter.createFromResource(this,
+                R.array.options_gear, R.layout.spinner_item);
+        gearSpinner.setAdapter(gearAdapter);
 
     }
 
@@ -90,7 +95,7 @@ public class InfoPage extends AppCompatActivity {
 
     public void retrieveSheet(){
         List<String> infos = readInfo();
-        if(infos.size()>0){
+        if(infos.size()>=8){
             String name = infos.get(NAME_INDEX);
             String comment = infos.get(COMMENT_INDEX);
             boolean climb = Boolean.parseBoolean(infos.get(CLIMB_INDEX));
@@ -98,6 +103,7 @@ public class InfoPage extends AppCompatActivity {
             int drive = Integer.parseInt(infos.get(DRIVE_INDEX));
             int shoot = Integer.parseInt(infos.get(SHOOTER_INDEX));
             int intake = Integer.parseInt(infos.get(INTAKE_INDEX));
+            int gear  = Integer.parseInt(infos.get(GEAR_INDEX));
 
             EditText nameBox = (EditText)findViewById(R.id.team_name);
             EditText commentBox = (EditText)findViewById(R.id.comments);
@@ -106,6 +112,7 @@ public class InfoPage extends AppCompatActivity {
             Spinner driveSpin = (Spinner)findViewById(R.id.drive_type);
             Spinner shootSpin = (Spinner)findViewById(R.id.shoot_position);
             Spinner intakeSpin = (Spinner)findViewById(R.id.intake_type);
+            Spinner gearSpin = (Spinner)findViewById(R.id.gear_ability);
 
             nameBox.setText(name);
             commentBox.setText(comment);
@@ -114,6 +121,7 @@ public class InfoPage extends AppCompatActivity {
             driveSpin.setSelection(drive);
             shootSpin.setSelection(shoot);
             intakeSpin.setSelection(intake);
+            gearSpin.setSelection(gear);
         }
     }
 
@@ -128,6 +136,7 @@ public class InfoPage extends AppCompatActivity {
         infos[SHOOTER_INDEX] = Integer.toString(((Spinner)findViewById(R.id.shoot_position)).getSelectedItemPosition());
         infos[INTAKE_INDEX] = Integer.toString(((Spinner)findViewById(R.id.intake_type)).getSelectedItemPosition());
         infos[CLIMB_INDEX] = String.valueOf(((CheckBox)findViewById(R.id.climber)).isChecked());
+        infos[GEAR_INDEX] = Integer.toString(((Spinner)findViewById(R.id.gear_ability)).getSelectedItemPosition());
         infos[COMMENT_INDEX] = ((EditText)findViewById(R.id.comments)).getText().toString().replace(System.getProperty("line.separator"), "").replace(","," ");
 
         try {

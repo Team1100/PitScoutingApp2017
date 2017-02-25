@@ -30,5 +30,10 @@
         <item>Airship</item>
         <item>Variable</item>
     </string-array>
+    <string-array name="options_gear">
+        <item>-</item>
+        <item>No</item>
+        <item>Yes</item>
+    </string-array>
 
 </resources>

@@ -149,6 +149,17 @@ public class TeamList extends AppCompatActivity {
                         info+="Variable,";
                         break;
                 }
+                switch (Integer.parseInt(data.get(InfoPage.GEAR_INDEX))){
+                    case 0:
+                        info += "-,";
+                        break;
+                    case 1:
+                        info += "No,";
+                        break;
+                    case 2:
+                        info += "Yes,";
+                        break;
+                }
                 info+=data.get(InfoPage.COMMENT_INDEX);
                 infos[i] = info;
             }catch(Exception q){
