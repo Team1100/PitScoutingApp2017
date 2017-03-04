@@ -92,6 +92,9 @@ public class TeamList extends AppCompatActivity {
                     case 2:
                         info+="4,";
                         break;
+                    case 3:
+                        info+="5";
+                        break;
                     case 4:
                         info+="6,";
                         break;

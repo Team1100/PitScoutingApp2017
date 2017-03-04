@@ -128,7 +128,7 @@ public class InfoPage extends AppCompatActivity {
     public void writeInfo(){
         String filename = teamNumber;
         FileOutputStream outputStream;
-        String[] infos = new String[7];
+        String[] infos = new String[8];
 
         infos[NAME_INDEX] = ((EditText)findViewById(R.id.team_name)).getText().toString().replace(","," ");
         infos[CIM_INDEX] = Integer.toString(((Spinner)findViewById(R.id.cim_count)).getSelectedItemPosition());
